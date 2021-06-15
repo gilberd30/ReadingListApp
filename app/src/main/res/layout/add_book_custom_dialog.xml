@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <com.aplikasi.makala.utils.MSPEditText
+        android:id="@+id/judulBuku"
+        android:hint="Judul Buku"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"/>
+
+    <com.aplikasi.makala.utils.MSPEditText
+        android:id="@+id/penulisBuku"
+        android:hint="Penulis Buku"
+        android:layout_marginBottom="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.aplikasi.makala.utils.MSPEditText
+        android:id="@+id/deskripsiBuku"
+        android:hint="Deskripsi Buku"
+        android:layout_marginBottom="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.aplikasi.makala.utils.MSPButton
+        android:id="@+id/tombolSelesai"
+        android:text="SELESAI"
+        android:background="@drawable/button_background"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
