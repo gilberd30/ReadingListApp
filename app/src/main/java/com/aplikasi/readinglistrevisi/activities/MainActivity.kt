@@ -1,5 +1,7 @@
 package com.aplikasi.readinglistrevisi.activities
 
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.Menu
 import android.widget.Button
@@ -29,6 +31,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //broadcast reciver
+        var AirPlaneReceiver = MyAirPlaneReceiver()
+        var filter = IntentFilter()
+        filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED)
+        registerReceiver(AirPlaneReceiver, filter)
+
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 

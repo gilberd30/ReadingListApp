@@ -9,27 +9,35 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ReadingListrevisi">
+        <receiver
+            android:name=".activities.MyAirPlaneReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="an"/>
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name=".activities.SplashActivity"
-            android:theme="@style/Theme.ReadingListrevisi.NoActionBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.ReadingListrevisi.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".activities.RegisterActivity"
-            android:theme="@style/Theme.ReadingListrevisi.NoActionBar"/>
-
-        <activity android:name=".activities.LoginActivity"
-            android:theme="@style/Theme.ReadingListrevisi.NoActionBar"/>
-
+        <activity
+            android:name=".activities.RegisterActivity"
+            android:theme="@style/Theme.ReadingListrevisi.NoActionBar" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:theme="@style/Theme.ReadingListrevisi.NoActionBar" />
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.ReadingListrevisi.NoActionBar"/>
+            android:theme="@style/Theme.ReadingListrevisi.NoActionBar" />
     </application>
 
 </manifest>
