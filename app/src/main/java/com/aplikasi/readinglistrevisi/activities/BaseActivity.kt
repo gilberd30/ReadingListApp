@@ -14,6 +14,8 @@ open class BaseActivity : AppCompatActivity() {
 
     private lateinit var mProgressDialog: Dialog
 
+
+
     fun showErrorSnackBar(message: String, errorMessage:Boolean){
         val snackBar = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG)
         val snackBarView = snackBar.view
@@ -52,4 +54,6 @@ open class BaseActivity : AppCompatActivity() {
         @Suppress("DEPRECATION")
         android.os.Handler().postDelayed({ doubleBackToExitPressedOnce = false },2000)
     }
+
+
 }

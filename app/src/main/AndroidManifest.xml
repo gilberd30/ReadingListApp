@@ -9,12 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ReadingListrevisi">
+        <activity android:name=".activities.AddBookActivity"></activity>
+
         <receiver
             android:name=".activities.MyAirPlaneReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="an"/>
+                <action android:name="an" />
             </intent-filter>
         </receiver>
 

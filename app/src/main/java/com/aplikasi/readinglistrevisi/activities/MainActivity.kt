@@ -1,7 +1,12 @@
 package com.aplikasi.readinglistrevisi.activities
 
+import android.app.*
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.widget.Button
@@ -18,13 +23,21 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.aplikasi.readinglist.data.Account
 import com.aplikasi.readinglist.data.EXTRA_ACCOUNT_REGISTER
 import com.aplikasi.readinglistrevisi.R
+import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.add_book_custom_dialog.*
 import kotlinx.android.synthetic.main.nav_header_main.*
 
 
 class MainActivity : AppCompatActivity() {
+
+    private val CHANNEL_ID = "channel_id-example_01"
+    private val notificationId = 101
+
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -37,6 +50,9 @@ class MainActivity : AppCompatActivity() {
         var filter = IntentFilter()
         filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED)
         registerReceiver(AirPlaneReceiver, filter)
+
+        //notification
+        creatNotificationChannel()
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -55,9 +71,9 @@ class MainActivity : AppCompatActivity() {
             val myDialog = myDialogBuilder.create()
 
             tombolSelesai.setOnClickListener {
-                
+                sendNotification()
+                myDialog.hide()
             }
-
             myDialog.show()
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
@@ -71,6 +87,37 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+    }
+
+    private fun creatNotificationChannel(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Notification Tittle"
+            val descriptionText = "Notification Description"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    private fun sendNotification() {
+        val bitMap = BitmapFactory.decodeResource(applicationContext. resources, R.drawable.header_background_login)
+        val bitMapLargeIcon = BitmapFactory.decodeResource(applicationContext.resources, R.drawable.header_background_login)
+
+        val builder = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(R.drawable.header_background_login)
+            .setContentTitle("Reading List APP")
+            .setContentText("Berhasil Menambahkan buku bacaan baru")
+            .setLargeIcon(bitMapLargeIcon)
+            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+            .setStyle((NotificationCompat.BigPictureStyle().bigPicture(bitMap)))
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+
+        with(NotificationManagerCompat.from(this)) {
+            notify(notificationId, builder.build())
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
